@@ -6,8 +6,33 @@
 		3) it must throw an Error if any of the range params is missing
 */
 
-function findPrimes() {
-	
+function findPrimes(arr) {
+	var primeArr = [];
+    for(var i = 0; i < arr.length; i++ ){
+        if(!Number(arr[i])){
+            throw “Element is not convertible to Number.”;
+		}
+		if(checkPrime(arr[i])){
+    	prime.push[arr[i]];
+		}
+    }
+    return primeArr;
+}
+
+function checkPrime(number){
+     if (number < 2){
+		return false;
+	 }
+       if (number != Math.round(n)){
+	   return false;
+	}
+	var isPrime = true;
+	for (var i = 2; i <= Math.sqrt(number); i++){
+      if (number % i == 0){
+      	isPrime = false;
+	  }
+   }
+    return isPrime;
 }
 
 module.exports = findPrimes;
