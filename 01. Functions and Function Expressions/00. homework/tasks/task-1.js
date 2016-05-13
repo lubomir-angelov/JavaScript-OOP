@@ -14,7 +14,7 @@
    				return null;
 			}
 			if(typeof array === 'undeifned'){
-   				throw “Error, array is undefined.”;
+   				throw "Error, array is undefined.";
 			}
 		for(var i = 0; i < arr.length; i++ ){
     		if(!Number(arr[i])){
