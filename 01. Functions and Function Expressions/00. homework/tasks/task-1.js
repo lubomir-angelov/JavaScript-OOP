@@ -22,6 +22,7 @@
 		}
 		sum += Number(arr[i]);
    	}
+   	return sum;
 }
 
 //hello ventsi
