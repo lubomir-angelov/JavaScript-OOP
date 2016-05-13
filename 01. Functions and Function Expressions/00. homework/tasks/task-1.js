@@ -8,8 +8,20 @@
 
 */
 
-function sum() {
-	
+		function sumArr(arr){
+   			var sum = 0;
+   			if(arr.length === 0){
+   				return null;
+			}
+			if(typeof array === ‘undeifned’){
+   				throw “Error, array is undefined.”;
+			}
+		for(var i = 0; i < arr.length; i++ ){
+    		if(!Number(arr[i])){
+        		throw “Element is not convertible to Number”;
+		}
+		sum += Number(arr[i]);
+   	}
 }
 
-module.exports = sum;
+module.exports = sumArr;
