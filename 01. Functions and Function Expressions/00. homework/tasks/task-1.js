@@ -13,12 +13,12 @@
    			if(arr.length === 0){
    				return null;
 			}
-			if(typeof array === ‘undeifned’){
+			if(typeof array === 'undeifned'){
    				throw “Error, array is undefined.”;
 			}
 		for(var i = 0; i < arr.length; i++ ){
     		if(!Number(arr[i])){
-        		throw “Element is not convertible to Number”;
+        		throw 'Element is not convertible to Number';
 		}
 		sum += Number(arr[i]);
    	}
