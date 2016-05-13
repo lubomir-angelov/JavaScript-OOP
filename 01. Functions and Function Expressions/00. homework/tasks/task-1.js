@@ -18,7 +18,7 @@
 			}
 		for(var i = 0; i < arr.length; i++ ){
     		if(!Number(arr[i])){
-        		throw 'Element is not convertible to Number';
+        		throw "Element is not convertible to Number";
 		}
 		sum += Number(arr[i]);
    	}
