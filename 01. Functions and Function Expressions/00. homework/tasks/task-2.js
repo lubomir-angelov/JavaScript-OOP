@@ -6,17 +6,14 @@
 		3) it must throw an Error if any of the range params is missing
 */
 
-function findPrimes(arr) {
+function findPrimes(a, b) {
 	var primeArr = [];
-    for(var i = 0; i < arr.length; i++ ){
-        if(!Number(arr[i])){
-            throw "Element is not convertible to Number.";
+	for (var i = a; i < b; i++) {
+		if (checkPrime(i)) {
+			primeArr.push(i);
 		}
-		if(checkPrime(arr[i])){
-    	prime.push[arr[i]];
-		}
-    }
-    return primeArr;
+	}
+	return primeArr;
 }
 
 function checkPrime(number){
