@@ -25,6 +25,5 @@
    	return sum;
 }
 
-//hello ventsi
 
 module.exports = sumArr;

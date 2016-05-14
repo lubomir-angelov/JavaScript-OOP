@@ -8,7 +8,14 @@
 
 function findPrimes(a, b) {
 	var primeArr = [];
-	for (var i = a; i < b; i++) {
+	
+	if(Number(a) === NaN || Number(b) === NaN){
+		throw e;
+	}
+	if (!a || !b) {
+		throw e;
+	}
+	for (var i = Number(a); i < Number(b); i++) {
 		if (checkPrime(i)) {
 			primeArr.push(i);
 		}
