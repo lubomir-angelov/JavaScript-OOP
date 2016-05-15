@@ -12,10 +12,11 @@ function findPrimes(a, b) {
 	if(Number(a) === NaN || Number(b) === NaN){
 		throw e;
 	}
-	if (!a || !b) {
+	if (a!==0 && b!==0 &&(!a || !b)) {
 		throw e;
 	}
-	for (var i = Number(a); i < Number(b); i++) {
+	
+	for (var i = Number(a); i <= Number(b); i++) {
 		if (checkPrime(i)) {
 			primeArr.push(i);
 		}
@@ -27,7 +28,7 @@ function checkPrime(number){
      if (number < 2){
 		return false;
 	 }
-       if (number != Math.round(n)){
+       if (number != Math.round(number)){
 	   return false;
 	}
 	var isPrime = true;
