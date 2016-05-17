@@ -25,11 +25,37 @@ function solve() {
 		var books = [];
 		var categories = [];
 		function listBooks() {
-			return books;
+			return books.sorted;
 		}
 
 		function addBook(book) {
 			book.ID = books.length + 1;
+			bookCat = book.category;
+
+			if(book.title.length < 2 || book.title.length > 100){
+				throw 'Invalid title';
+			}
+			if(book.author.length === 0){
+				throw 'Invalid author';
+			}
+			if(book.ISBN.length !== 10 || book.ISBN.length !== 13){
+				throw 'Invalid ISBN';
+			}
+			for (var i = 0; i < books.length; i++) {
+				if(books[i].title === book.title){
+					throw 'Existing title';
+				}
+				if(book.ISBN === books[i].ISBN){
+					throw 'Existing ISBN';
+				}
+			}
+
+			curCat = listCategories();
+			for (var i = 0; i < curCat.length; i++) {
+				if(curCat[i] != bookCat){
+					throw 'Exisiting category';
+				}
+			}
 			books.push(book);
 			return book;
 		}
