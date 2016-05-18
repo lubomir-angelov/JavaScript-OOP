@@ -22,23 +22,37 @@
 */
 function solve() {
 	var library = (function () {
+		var empty = [];
+
 		var books = [];
 		var categories = [];
-		function listBooks() {
-			return books.sorted;
+
+		function listBooks(author, category) {
+			if(category){
+				var counter = 0;
+				for (var i = 0; i < books.length; i++) {
+					if(books[i].category === category) {
+						counter++;
+					} 
+				}
+				if(counter === 0){
+					return empty;
+				}
+			}
+			return books.sort();
 		}
 
 		function addBook(book) {
 			book.ID = books.length + 1;
 			bookCat = book.category;
 
-			if(book.title.length < 2 || book.title.length > 100){
+			if(!book.title || book.title.length < 2 || book.title.length > 100){
 				throw 'Invalid title';
 			}
-			if(book.author.length === 0){
+			if(!book.author || book.author.length === 0){
 				throw 'Invalid author';
 			}
-			if(book.ISBN.length !== 10 || book.ISBN.length !== 13){
+			if(!book.ISBN || book.ISBN.length !== 10 || book.ISBN.length !== 13){
 				throw 'Invalid ISBN';
 			}
 			for (var i = 0; i < books.length; i++) {
@@ -56,12 +70,14 @@ function solve() {
 					throw 'Exisiting category';
 				}
 			}
+			console.log(bookCat);
+			category.push(bookCat);
 			books.push(book);
 			return book;
 		}
 
 		function listCategories() {
-			return categories;
+			return categories.sort();
 		}
 
 		return {
