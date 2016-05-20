@@ -30,41 +30,31 @@ function solve() {
 		}
 
 		function addBook(book) {
-			book.ID = books.length + 1;
-			var bookTitle = book.title;
-			var bookISBN = book.ISBN;
-			var bookAuthor = book.Author;
-			var bookCategory = book.category;
+			book.ID = books.length + 1;			
 
-			if(!bookTitle || bookTitle.length < 2 || bookTitle.length > 100){
-				throw 'Invalid title';
+			if(!book.title || book.title.length < 2 || book.title.length > 100){
+				throw new Error('Invalid title');
 			}
-			if(!bookAuthor || bookAuthor.length === 0){
-				throw 'Invalid author';
+			if(!book.author){
+				throw new Error('Invalid author');
 			}
-			if(!(bookISBN.length !== 10 || bookISBN.length !== 13)){
-				throw 'Invalid ISBN';
+			if(!(book.isbn.length === 10 || book.isbn.length === 13)){
+				throw new Error('Invalid ISBN');
 			}
 
-			function checkAvailabilityTitle(books, bookTitle) {
-    			return books.some(function(innerParam){
-    		  		book.title === innerParam;
+			function checkAvailability(arr, val) {
+    			return arr.some(function(arrVal){
+    		  		return val === arrVal;
     			});
 			}
 
-			function checkAvailabilityISBN(books, bookISBN) {
-    			return books.some(function(innerParam){
-    		 		book.ISBN === innerParam;
-    		 	});
+			if(checkAvailability(books, book.title)){
+				throw new Error('Existing title');
 			}
-
-			if(checkAvailabilityTitle){
-				throw 'Existing title';
+			if (checkAvailability(books, book.isbn)) {
+				throw new Error('Existing ISBN');
 			}
-			if (checkAvailabilityISBN) {
-				throw 'Existing ISBN';
-			}
-			if(!bookCategory){
+			if(!book.category){
 				book.category = '';
 			}
 
