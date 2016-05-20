@@ -22,29 +22,19 @@
 */
 function solve() {
 	var library = (function () {
-		var empty = [];
-
 		var books = [];
 		var categories = [];
 
-		function listBooks(author, category) {
-			if(category){
-				var counter = 0;
-				for (var i = 0; i < books.length; i++) {
-					if(books[i].category === category) {
-						counter++;
-					} 
-				}
-				if(counter === 0){
-					return empty;
-				}
-			}
-			return books.sort();
+		function listBooks() {
+			return books;
 		}
 
 		function addBook(book) {
 			book.ID = books.length + 1;
-			bookCat = book.category;
+			bookTitle = book.title;
+			bookISBN = book.ISBN;
+			bookAuthor = book.Author;
+			bookCategory = book.category;
 
 			if(!book.title || book.title.length < 2 || book.title.length > 100){
 				throw 'Invalid title';
@@ -55,24 +45,28 @@ function solve() {
 			if(!book.ISBN || book.ISBN.length !== 10 || book.ISBN.length !== 13){
 				throw 'Invalid ISBN';
 			}
-			for (var i = 0; i < books.length; i++) {
-				if(books[i].title === book.title){
-					throw 'Existing title';
-				}
-				if(book.ISBN === books[i].ISBN){
-					throw 'Existing ISBN';
-				}
+
+			function checkAvailabilityTitle(books, bookTitle) {
+    		return books.some(function(innerParam){
+    		  		book.title === innerParam;
+    			});
 			}
 
-			curCat = listCategories();
-			for (var i = 0; i < curCat.length; i++) {
-				if(curCat[i] != bookCat){
-					throw 'Exisiting category';
-				}
+			function checkAvailabilityISBN(books, bookISBN) {
+    		return books.some(function(innerParam){
+    		 		book.ISBN === innerParam;
+    		 	});
 			}
-			console.log(bookCat);
-			category.push(bookCat);
+
+			if(checkAvailabilityTitle){
+				throw 'Existing title';
+			}
+			if (checkAvailabilityISBN) {
+				throw 'Existing ISBN';
+			}
+
 			books.push(book);
+
 			return book;
 		}
 
@@ -91,5 +85,33 @@ function solve() {
 		};
 	} ());
 	return library;
+
+	if (!Array.prototype.some) {
+  		Array.prototype.some = function(fun/*, thisArg*/) {
+    		'use strict';
+
+    		if (this == null) {
+      		throw new TypeError('Array.prototype.some called on null or undefined');
+    		}
+
+    		if (typeof fun !== 'function') {
+      		throw new TypeError();
+    		}
+
+    		var t = Object(this);
+    		var len = t.length >>> 0;
+
+    		var thisArg = arguments.length >= 2 ? arguments[1] : void 0;
+    		for (var i = 0; i < len; i++) {
+      		if (i in t && fun.call(thisArg, t[i], i, t)) {
+        		return true;
+      			}
+    		}
+
+    		return false;
+  		};
+	}
 }
+
 module.exports = solve;
+
