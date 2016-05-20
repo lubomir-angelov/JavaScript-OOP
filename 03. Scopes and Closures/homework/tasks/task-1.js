@@ -47,13 +47,13 @@ function solve() {
 			}
 
 			function checkAvailabilityTitle(books, bookTitle) {
-    		return books.some(function(innerParam){
+    			return books.some(function(innerParam){
     		  		book.title === innerParam;
     			});
 			}
 
 			function checkAvailabilityISBN(books, bookISBN) {
-    		return books.some(function(innerParam){
+    			return books.some(function(innerParam){
     		 		book.ISBN === innerParam;
     		 	});
 			}
@@ -64,7 +64,9 @@ function solve() {
 			if (checkAvailabilityISBN) {
 				throw 'Existing ISBN';
 			}
-
+			if(!bookCategory){
+				book.category = '';
+			}
 			books.push(book);
 
 			return book;
