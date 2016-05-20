@@ -31,18 +31,18 @@ function solve() {
 
 		function addBook(book) {
 			book.ID = books.length + 1;
-			bookTitle = book.title;
-			bookISBN = book.ISBN;
-			bookAuthor = book.Author;
-			bookCategory = book.category;
+			var bookTitle = book.title;
+			var bookISBN = book.ISBN;
+			var bookAuthor = book.Author;
+			var bookCategory = book.category;
 
-			if(!book.title || book.title.length < 2 || book.title.length > 100){
+			if(!bookTitle || bookTitle.length < 2 || bookTitle.length > 100){
 				throw 'Invalid title';
 			}
-			if(!book.author || book.author.length === 0){
+			if(!bookAuthor || bookAuthor.length === 0){
 				throw 'Invalid author';
 			}
-			if(!book.ISBN || book.ISBN.length !== 10 || book.ISBN.length !== 13){
+			if(!(bookISBN.length !== 10 || bookISBN.length !== 13)){
 				throw 'Invalid ISBN';
 			}
 
@@ -67,6 +67,7 @@ function solve() {
 			if(!bookCategory){
 				book.category = '';
 			}
+
 			books.push(book);
 
 			return book;
