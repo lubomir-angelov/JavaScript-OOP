@@ -26,12 +26,49 @@ function solve() {
 		var categories = [];
 
 		function listBooks() {
-			return books;
+			var args = arguments[0];
+			var listed = [];
+			if(!args){
+				listed = books;
+			}
+			if(books.length === 0){
+				return [];
+			}
+			function checkAvailabilityCategory(arr, val){
+				return arr.some(function(obj){
+					return val === obj.category;
+				});
+			}
+			function checkAvailabilityAuthor(arr, val){
+				return arr.some(function(obj){
+					return val === obj.author;
+				});
+			}
+			if (!checkAvailabilityAuthor(books, args.author)){
+				return [];
+			} 
+			if(!checkAvailabilityCategory(books, args.category)){
+				return [];
+			}
+			var counter = 0;
+
+			for (var i = 0; i < books.length; i++) {
+				if(books[i].category === args.category){
+					counter++;
+					listed.push(books[i]);
+				}
+			}
+			if(listed.length === 0) {
+				listed = books;
+			}
+
+			return listed;
 		}
 
 		function addBook(book) {
 			book.ID = books.length + 1;			
 
+			//validate entry
 			if(!book.title || book.title.length < 2 || book.title.length > 100){
 				throw new Error('Invalid title');
 			}
@@ -41,17 +78,21 @@ function solve() {
 			if(!(book.isbn.length === 10 || book.isbn.length === 13)){
 				throw new Error('Invalid ISBN');
 			}
-
-			function checkAvailability(arr, val) {
-    			return arr.some(function(arrVal){
-    		  		return val === arrVal;
+			//check existing
+			function checkAvailabilityTitle(arr, val) {
+    			return arr.some(function(obj){
+    		  		return val === obj.title;
     			});
 			}
-
-			if(checkAvailability(books, book.title)){
+			function checkAvailabilityISBN(arr, val) {
+    			return arr.some(function(obj){
+    		  		return val === obj.isbn;
+    			});
+			}
+			if(checkAvailabilityTitle(books, book.title)){
 				throw new Error('Existing title');
 			}
-			if (checkAvailability(books, book.isbn)) {
+			if (checkAvailabilityISBN(books, book.isbn)) {
 				throw new Error('Existing ISBN');
 			}
 			if(!book.category){
